@@ -3,5 +3,6 @@
     <pages>
         <page name='1_Thread'/>
         <page name='2_QualityOfService'/>
+        <page name='3_Synchronization&amp;Mutex'/>
     </pages>
 </playground>
