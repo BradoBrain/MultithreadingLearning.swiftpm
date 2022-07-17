@@ -7,5 +7,6 @@
         <page name='3_Synchronization&amp;Mutex'/>
         <page name='4_NSRecursiveLock&amp;MutexRecursiveLock'/>
         <page name='5_NSCondition'/>
+        <page name='6_Locks'/>
     </pages>
 </playground>
