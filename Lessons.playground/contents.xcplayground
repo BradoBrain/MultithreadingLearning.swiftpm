@@ -8,5 +8,6 @@
         <page name='4_NSRecursiveLock&amp;MutexRecursiveLock'/>
         <page name='5_NSCondition'/>
         <page name='6_Locks'/>
+        <page name='7_GCD, Concurrent_Serial, sync_async'/>
     </pages>
 </playground>
