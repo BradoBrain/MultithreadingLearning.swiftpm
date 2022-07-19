@@ -3,8 +3,8 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Text("Hi, Multithreading")
-            
+            //Text("Hi, Multithreading")
+            MainView()
         }
     }
 }
