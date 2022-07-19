@@ -3,7 +3,7 @@
 import UIKit
 import PlaygroundSupport
 
-// Quality Of Service
+// MARK: Quality Of Service
 
 // C
 var pthread = pthread_t(bitPattern: 0)

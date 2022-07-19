@@ -2,7 +2,7 @@
 
 import Foundation
 
-// NSCondition
+// MARK: NSCondition
 
 // C
 var available = false
@@ -73,7 +73,7 @@ let conditionCWrite = ConditionCWrite()
 conditionCPrint.start()
 conditionCWrite.start()
 
-// NSCondition
+//  NSCondition
 
 let nsCondition = NSCondition()
 var isAvailable = false

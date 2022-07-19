@@ -2,7 +2,7 @@
 
 import Foundation
 
-// Synchronization & Mutex
+// MARK: Synchronization & Mutex
 
 
 // C mutex function

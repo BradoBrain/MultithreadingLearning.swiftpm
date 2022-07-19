@@ -1,7 +1,7 @@
 import UIKit
 import PlaygroundSupport
 
-// Thread
+// MARK: Thread
 
 // UNIX (POSIX) thread in C
 
