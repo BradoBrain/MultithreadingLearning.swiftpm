@@ -4,6 +4,8 @@ import Foundation
 import PlaygroundSupport
 import UIKit
 
+PlaygroundPage.current.needsIndefiniteExecution = true
+
 // MARK: GCD, Concurrent_Serial, sync_async
 
 class customQueue {
@@ -101,8 +103,60 @@ navBar.view.frame = CGRect(x: 10, y: 10, width: 300, height: 500)
 
 PlaygroundPage.current.liveView = navBar
 
+// Also look at GSD7_2
 
+// MARK: WorkItem in GCD
 
+class DispatchWorkItemOne {
+    private let queue = DispatchQueue(label: "DispatchWorkItemOne", attributes: .concurrent)
+    
+    func create() {
+        let workItem = DispatchWorkItem {
+            print(Thread.current)
+            print("Start task")
+        }
+        
+        workItem.notify(queue: .main) {
+            print(Thread.current)
+            print("Finish task")
+        }
+        
+        queue.async(execute: workItem)
+    }
+}
 
+let dispatchWorkItemOne = DispatchWorkItemOne()
+dispatchWorkItemOne.create()
+
+class DispatchWorkItemTwo {
+    private let queue = DispatchQueue(label: "DispatchWorkItemTwo") // Default attribute value is .serial
+    
+    func create() {
+        queue.async {
+            sleep(3)
+            print("Task 1")
+        }
+        
+        queue.async {
+            sleep(5)
+            print("Task 2")
+        }
+        
+        let workItem = DispatchWorkItem {
+            print(Thread.current)
+            print("Start workItem's task")
+        }
+        
+        queue.async(execute: workItem)
+        
+        
+        workItem.cancel() // it cancel workItem block if it is not started
+    }
+}
+
+let dispatchWorkItemTwo = DispatchWorkItemTwo()
+dispatchWorkItemTwo.create()
+
+// Also look at GCD7_3
 
 //: [Next](@next)
