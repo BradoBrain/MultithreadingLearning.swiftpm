@@ -159,4 +159,75 @@ dispatchWorkItemTwo.create()
 
 // Also look at GCD7_3
 
+// MARK: Semaphore
+
+let cuncurrentQueue = DispatchQueue(label: "Semaphore Thread", attributes: .concurrent)
+
+let semaphore = DispatchSemaphore(value: 1)
+cuncurrentQueue.async {
+    semaphore.wait() // it make value: 2 - 1
+    sleep(3)
+    print("Perform a method 1")
+    semaphore.signal()
+}
+
+cuncurrentQueue.async {
+    semaphore.wait()
+    sleep(3)
+    print("Perform a method 2")
+    semaphore.signal()
+}
+
+cuncurrentQueue.async {
+    semaphore.wait()
+    sleep(3)
+    print("Perform a method 3")
+    semaphore.signal()
+}
+
+let anotherSemaphore = DispatchSemaphore(value: 1)
+
+DispatchQueue.concurrentPerform(iterations: 11) { (num: Int) in
+    anotherSemaphore.wait(timeout: .distantFuture)
+    sleep(2)
+    print("Iteration number is \(num)")
+    anotherSemaphore.signal()
+}
+
+
+
+class SemaphorClass {
+    private let semaphoreClass = DispatchSemaphore(value: 2)
+    private var array = [Int]()
+
+    private func semaphoreMethod(id: Int) {
+        semaphoreClass.wait()
+        
+        array.append(id)
+        print(array.count)
+        Thread.sleep(forTimeInterval: 3)
+        semaphoreClass.signal()
+    }
+    
+    func startAllThread() {
+        DispatchQueue.global().async {
+            self.semaphoreMethod(id: 222)
+            print(Thread.current)
+        }
+        
+        DispatchQueue.global().async {
+            self.semaphoreMethod(id: 555)
+            print(Thread.current)
+        }
+        
+        DispatchQueue.global().async {
+            self.semaphoreMethod(id: 777)
+            print(Thread.current)
+        }
+    }
+}
+
+let semaphoreClass = SemaphorClass()
+semaphoreClass.startAllThread()
+
 //: [Next](@next)

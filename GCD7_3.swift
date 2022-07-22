@@ -20,7 +20,8 @@ struct WorkItemView: View {
             VStack {
                 Spacer()
                 
-// One of the ways to get photo from URL  AsyncImage(url: imageURL) { $0.image?.resizable().aspectRatio(contentMode: .fit) }
+// One of the ways to get photo from URL
+//                AsyncImage(url: imageURL) { $0.image?.resizable().aspectRatio(contentMode: .fit) }
                 
                 Image(uiImage: image)
                     .resizable()
