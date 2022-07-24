@@ -230,4 +230,69 @@ class SemaphorClass {
 let semaphoreClass = SemaphorClass()
 semaphoreClass.startAllThread()
 
+// MARK: DispatchGroup
+
+class DispatchGroupTestSerial {
+    private let queue = DispatchQueue(label: "Serial Queue")
+    
+    private let redGroup = DispatchGroup()
+    
+    func groupMethod() {
+        queue.async(group: redGroup) {
+            sleep(2)
+            print("Serial Group Task 1")
+        }
+        
+        queue.async(group: redGroup) {
+            sleep(2)
+            print("Serial Group Task 2")
+        }
+        
+        redGroup.notify(queue: .main) {
+            print("Serial Group is finished the work")
+        }
+    }
+}
+
+let dispatchGroupTest = DispatchGroupTestSerial()
+dispatchGroupTest.groupMethod()
+
+class DispatchGroupTestConcurrent {
+    private let queue = DispatchQueue(label: "Serial Queue", attributes: .concurrent)
+    
+    private let greenGroup = DispatchGroup()
+    
+    func groupMethod() {
+ 
+        greenGroup.enter()
+        queue.async {
+            sleep(1)
+            print("Concurrent Group Task 1")
+            self.greenGroup.leave()
+        }
+        
+        greenGroup.enter()
+        queue.async {
+            sleep(1)
+            print("Concurrent Group Task 2")
+            self.greenGroup.leave()
+        }
+        
+        greenGroup.wait()
+        
+        print("All was finished")
+        
+        greenGroup.notify(queue: .main) {
+            print("Concurrent Group is finished")
+        }
+    }
+}
+
+let dispatchGroupTestConcurrent = DispatchGroupTestConcurrent()
+dispatchGroupTestConcurrent.groupMethod()
+
+// Also look at GCD7_4
+
+
+
 //: [Next](@next)

@@ -5,7 +5,8 @@ struct ContentView: View {
         VStack {
 //            Text("Hi, Multithreading")
 //            MainView()
-            WorkItemView()
+//            WorkItemView()
+            FourPicView()
         }
     }
 }
